@@ -4,6 +4,8 @@
 
 using namespace eosio;
 
+#define BLAKE2B_BLOCKBYTES 128
+
 CONTRACT r4ndomnumb3r : public contract
 {
 public:
@@ -22,5 +24,20 @@ public:
     };
     using rng_t = singleton<"rng"_n, rng>;
 
-    ACTION generate();
+    TABLE rng2
+    {
+        uint64_t state_0;
+        uint64_t state_1;
+        uint64_t state_2;
+        uint64_t state_3;
+        uint64_t state_4;
+        uint64_t state_5;
+        uint64_t state_6;
+        uint64_t state_7;
+    };
+    using rng2_t = singleton<"rng2"_n, rng2>;
+
+    ACTION generate(const uint64_t& salt);
+
+    ACTION generate2(const uint64_t& salt);
 };
